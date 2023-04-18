@@ -26,6 +26,7 @@ function DataStore.getStoredData(dataStore)
 		DataStore.Data[dataStore] = {}
 		DataStore.DataCache[dataStore] = {}
 	end
+
 	return DataStore.Data[dataStore]
 end
 
@@ -130,6 +131,7 @@ function DataStore.setDataAsync(dataStore, index, newData, userIds, metaData)
 	assert(typeof(index) == "string", "index argument must be a string")
 
 	local setOptions
+
 	if metaData then
 		setOptions= Instance.new("DataStoreSetOptions")
 		setOptions:SetMetadata(metaData)
@@ -198,6 +200,7 @@ function DataStore.restorePreviousVersion(dataStore, index, minDate, maxDate)
 	end
 
 	local maxDateTime = DateTime.fromUniversalTime(maxDate.year, maxDate.month, maxDate.day, maxDate.hour or 0, maxDate.min or 0)
+
 	local listSuccess, pages = pcall(function()
 		return dataStore:ListVersionsAsync(index, Enum.SortDirection.Descending, minDateTime, maxDateTime.UnixTimestampMillis)
 	end)

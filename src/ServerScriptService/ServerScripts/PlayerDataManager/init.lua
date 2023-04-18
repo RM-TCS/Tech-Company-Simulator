@@ -1,5 +1,5 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
 local loadModule, getDataStream = table.unpack(require(ReplicatedStorage.ZenithFramework))
@@ -43,8 +43,10 @@ end
 -- Dispatches the new data to rodux for UI changes and then updates the data store directly
 function PlayerDataManager:updatePlayerData(userId, action, ...)
 	RoduxStore:dispatch(action(userId, ...))
+
 	local newData = RoduxStore:getState().playerData[tostring(userId)]
 	local player = Players:GetPlayerByUserId(userId)
+
 	if not newData or not player or not profiles[player] then return end
 
 	profiles[player].Data = newData
@@ -56,6 +58,7 @@ end
 
 function PlayerDataManager.playerAdded(player)
 	local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId)
+
 	if profile ~= nil then
 		-- Reset data for testing if enabled
 		if CONFIG.RESET_PLAYER_DATA and RunService:IsStudio() then 
@@ -69,6 +72,7 @@ function PlayerDataManager.playerAdded(player)
 			-- The profile could've been loaded on another Roblox server:
 			player:Kick()
 		end)
+
 		if player:IsDescendantOf(Players) == true then
 			profiles[player] = profile
 			-- A profile has been successfully loaded
@@ -96,6 +100,7 @@ function PlayerDataManager.playerRemoving(player)
 	end
 
 	local profile = profiles[player]
+
 	if profile ~= nil then
 		profile:Release()
 	end

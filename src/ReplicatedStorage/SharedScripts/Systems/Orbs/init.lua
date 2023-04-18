@@ -11,12 +11,15 @@ local Orbs = {}
 -- Gives the player an orb with the given name, level and XP
 function Orbs:giveOrb(player, orbId, orbLevel, orbXP)
 	if RunService:IsClient() then return end
+
 	local gameValues = RoduxStore:waitForValue("gameValues")
 	local orbValues = gameValues.orbs
+
 	if not orbValues[orbId] then
-		warn("Invalid orb ID")
+		warn("Invalid orb ID" .. orbId)
 		return false
 	end
+
 	InventoryManager.addItem(player.UserId, "Inventory", "Orbs", {
 		id = orbId;
 		level = orbLevel or 1;
@@ -28,6 +31,7 @@ end
 function Orbs.getOrbBoosts(orbId)
 	local gameValues = RoduxStore:waitForValue("gameValues")
 	local orbValues = gameValues.orbs
+
 	if orbValues and orbValues[orbId] then
 		return orbValues[orbId].boosts
 	end

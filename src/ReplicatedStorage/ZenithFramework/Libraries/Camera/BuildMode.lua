@@ -284,10 +284,12 @@ return function(self, startCFrame, plotLength)
 	Controls:Disable()
 	resetValues()
 	Camera.CameraType = Enum.CameraType.Scriptable
+
 	if startCFrame then
 		buildModeCam.startCF = startCFrame
 		buildModeCam.origin = startCFrame
 		buildModeCam.plotSize = plotLength
+
 		moveCam(self)
 		rotateCam(self)
 	end

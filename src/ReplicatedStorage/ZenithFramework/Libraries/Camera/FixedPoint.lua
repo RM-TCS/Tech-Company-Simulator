@@ -15,7 +15,8 @@ return function(self, pos, rotation, lookAt)
 
 	if (not pos or typeof(pos) == "Vector3") and (not rotation or typeof(rotation) == "Vector3") and (not lookAt or typeof(lookAt) == "Vector3") then
 		Camera.CameraType = Enum.CameraType.Scriptable
-		local newCF 
+		local newCF
+
 		if lookAt then
 			newCF = CFrame.lookAt((pos and pos) or camCF.Position, (lookAt and lookAt) or (camCF * CFrame.new(camCF.LookVector)).Position)
 		elseif rotation then

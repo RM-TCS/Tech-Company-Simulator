@@ -18,6 +18,7 @@ end
 -- Boosts the vehicle for a duration, or permanently if there is no duration
 function Vehicle:boost(scale, duration)
 	self.speed = self.baseSpeed * scale
+
 	if duration then
 		task.wait(duration)
 		self.speed = self.baseSpeed

@@ -85,6 +85,7 @@ function ModuleScriptLoader:loadAll()
 	end):andThen(function()
 		for moduleName, moduleInfo in pairs(self._modules) do
 			local loadedModule = loadedModules[moduleName]
+
 			if typeof(loadedModule) == "table" 
 				and not moduleInfo.isLibrary
 				and not moduleInfo.isPackage 

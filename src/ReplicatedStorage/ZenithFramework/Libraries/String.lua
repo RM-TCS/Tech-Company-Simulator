@@ -51,8 +51,10 @@ end
 function String.convertToMSms(milliseconds)
 	local seconds = math.floor(milliseconds / 1000)
 	local minutes = math.floor(seconds / 60)
+
 	seconds = math.floor(seconds % 60)
 	milliseconds = string.sub(tostring(milliseconds - (seconds * 1000)), 1, 1)
+
 	if minutes < 10 and seconds >= 10 then
 		return "0"..minutes..":"..seconds.."."..milliseconds
 	elseif minutes >= 10 and seconds < 10 then
@@ -68,6 +70,7 @@ end
 function String.convertToMS(seconds)
 	local minutes = math.floor(seconds / 60)
 	seconds = math.floor(seconds % 60)
+
 	if minutes < 10 and seconds >= 10 then
 		return "0"..minutes..":"..seconds
 	elseif minutes >= 10 and seconds < 10 then
@@ -83,14 +86,17 @@ end
 function String.convertToHM(seconds)
 	local hours = math.floor(seconds / 3600)
 	local minutes = math.floor((seconds % 3600) / 60)
+
 	local hoursText = hours
 	local minutesText = minutes
+
 	if hours < 10 then
 		hoursText = "0" .. hours
 	end
 	if minutes < 10 then
 		minutesText = "0" .. minutes
 	end
+
 	return hoursText .. ":" .. minutesText
 end
 
@@ -98,10 +104,13 @@ end
 function String.convertToHMS(seconds)
 	local hours = math.floor(seconds / 3600)
 	local minutes = math.floor((seconds % 3600) / 60)
+
 	seconds = math.floor(seconds % 60)
+
 	local hoursText = hours
 	local minutesText = minutes
 	local secondsText = seconds
+
 	if hours < 10 then
 		hoursText = "0" .. hours
 	end
@@ -111,6 +120,7 @@ function String.convertToHMS(seconds)
 	if seconds < 10 then
 		secondsText = "0" .. seconds
 	end
+
 	return hoursText .. ":" .. minutesText .. ":" .. secondsText
 end
 
@@ -118,12 +128,15 @@ end
 function String.commaFormat(amount)
 	local formatted = amount
 	local k
+
 	while true do  
 		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+
 		if k == 0 then
 			break
 		end
 	end
+
 	return formatted
   end
 
